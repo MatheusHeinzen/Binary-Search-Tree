@@ -48,11 +48,15 @@ public class TreeVisualizer {
         JButton addButton = new JButton("Adicionar jogador");
         JButton searchButton = new JButton("Buscar");
         JButton removeButton = new JButton("Remover");
+        JButton zoomInBtn = new JButton("+");
+        JButton zoomOutBtn = new JButton("-");
         toggleLabelButton = new JButton("Mostrar posição");
         addButton.addActionListener(event -> addPlayerFromInputs());
         searchButton.addActionListener(event -> searchPlayerFromInput());
         removeButton.addActionListener(event -> removePlayerFromInput());
         toggleLabelButton.addActionListener(event -> toggleNodeLabels());
+        zoomInBtn.addActionListener(e -> treePanel.zoomIn());
+        zoomOutBtn.addActionListener(e -> treePanel.zoomOut());
         topBar.add(new JLabel("Nome:"));
         topBar.add(nicknameField);
         topBar.add(new JLabel("Posição:"));
@@ -61,6 +65,8 @@ public class TreeVisualizer {
         topBar.add(searchButton);
         topBar.add(removeButton);
         topBar.add(toggleLabelButton);
+        topBar.add(zoomInBtn);
+        topBar.add(zoomOutBtn);
         return topBar;
     }
 
@@ -146,12 +152,12 @@ public class TreeVisualizer {
     }
 
     private void renderTree() {
-        int height = Math.max(1, controller.getHeight());
-        int panelHeight = Math.max(500, 200 + height * 130);
-        int panelWidth = Math.max(1400, (int) Math.pow(2, height) * 42);
+        int panelWidth = controller.countNodes() * 90;
+        int panelHeight = controller.getHeight() * 120;
         treePanel.setPreferredSize(new Dimension(panelWidth, panelHeight));
         treePanel.revalidate();
         treePanel.repaint();
+        treePanel.startAnimation();
     }
 
     private void redrawTree() {

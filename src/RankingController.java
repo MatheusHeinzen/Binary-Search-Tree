@@ -33,4 +33,6 @@ public class RankingController {
         return bst.getRoot();
     }
 
+    public int countNodes() { return bst.countNodes();   }
+
 }

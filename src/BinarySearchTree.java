@@ -159,5 +159,16 @@ public class BinarySearchTree {
         return 1 + Math.max(getHeight(current.getLeft()),getHeight(current.getRight()));
     }
 
+    public int countNodes() {
+        return countNodesRecursive(root);
+    }
 
+    private int countNodesRecursive(Node node) {
+        if (node == null) {
+            return 0;
+        }
+        return 1
+                + countNodesRecursive(node.getLeft())
+                + countNodesRecursive(node.getRight());
+    }
 }
