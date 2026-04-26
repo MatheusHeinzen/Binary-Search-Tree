@@ -92,7 +92,7 @@ public class TreeVisualizer {
             redrawTree();
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(frame, "Posição inválida.");
-        } catch (IllegalStateException e) {
+        } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(frame, e.getMessage());
         }
     }
