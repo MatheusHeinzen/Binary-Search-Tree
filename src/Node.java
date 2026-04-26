@@ -2,6 +2,7 @@ public class Node {
     private Player player;
     private Node left;
     private Node right;
+    private boolean highlighted = false;
 
     public Node(Player player) {
         this.player = player;
@@ -30,5 +31,9 @@ public class Node {
     public void setRight(Node right) {
         this.right = right;
     }
+
+    public boolean isHighlighted() { return highlighted; }
+
+    public void setHighlighted(boolean highlighted) { this.highlighted = highlighted; }
 
 }

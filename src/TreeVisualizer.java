@@ -100,13 +100,16 @@ public class TreeVisualizer {
     private void searchPlayerFromInput() {
         String nickname = nicknameField.getText().trim();
         String rankingText = rankingField.getText().trim();
-        Player found;
+        boolean found;
+        Player find;
         if (!nickname.isEmpty()) {
-            found = controller.searchPlayer(nickname);
+            found = controller.searchByName(nickname, treePanel::repaint);
+            find = controller.searchPlayer(nickname);
         } else if (!rankingText.isEmpty()) {
             try {
                 int ranking = Integer.parseInt(rankingText);
-                found = controller.searchPlayer(ranking);
+                found = controller.searchByRanking(ranking, treePanel::repaint);
+                find = controller.searchPlayer(ranking);
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(frame, "Posição inválida.");
                 return;
@@ -115,13 +118,14 @@ public class TreeVisualizer {
             JOptionPane.showMessageDialog(frame, "Informe nome ou posição para buscar.");
             return;
         }
-        if (found == null) {
-            JOptionPane.showMessageDialog(frame, "Jogador não encontrado.");
-            return;
+        if (!found) {
+            JOptionPane.showMessageDialog(
+                    frame,
+                    "Jogador não encontrado");
         }
         JOptionPane.showMessageDialog(
                 frame,
-                "Jogador encontrado: " + found.getNickname() + " (posição " + found.getRanking() + ")"
+                "Jogador encontrado: " + find.getNickname() + " na posição " + find.getRanking()
         );
     }
 

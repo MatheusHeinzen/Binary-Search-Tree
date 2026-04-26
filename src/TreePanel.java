@@ -7,7 +7,7 @@ public class TreePanel extends JPanel {
     private final RankingController controller;
     private boolean showRanking;
     private double zoom = 1.0;
-    private int nodeGapX = 80;
+    private int nodeGapX = 45;
     private int nodeGapY = 100;
     private int currentX;
     private Map<Node, NodeView> nodeViews = new HashMap<>();
@@ -21,7 +21,7 @@ public class TreePanel extends JPanel {
     }
 
     public void zoomIn() { zoom = Math.min(zoom * 1.1, 3.0); revalidate(); repaint();}
-    public void zoomOut() { zoom = Math.max(zoom / 1.1, 0.3); revalidate(); repaint();}
+    public void zoomOut() { zoom = Math.max(zoom / 1.1, 0.2); revalidate(); repaint();}
 
     @Override
     public Dimension getPreferredSize() {
@@ -50,7 +50,7 @@ public class TreePanel extends JPanel {
         if (node == null) return -1;
         int leftX = drawTree(node.getLeft(), depth + 1);
         int myX = currentX;
-        int myY = 50 + depth * nodeGapY;
+        int myY = 30 + depth * nodeGapY;
 
         currentX += nodeGapX;
         int rightX = drawTree(node.getRight(), depth + 1);
@@ -85,7 +85,11 @@ public class TreePanel extends JPanel {
         int drawX = x - nodeWidth / 2;
         int drawY = y - nodeHeight / 2;
 
-        g2d.setColor(Color.WHITE);
+        Color nodeColor = node.isHighlighted()
+                ? Color.YELLOW
+                : Color.WHITE;
+
+        g2d.setColor(nodeColor);
         g2d.fillRoundRect(drawX, drawY, nodeWidth, nodeHeight, arc, arc);
         g2d.setColor(Color.BLACK);
         g2d.drawRoundRect(drawX, drawY, nodeWidth, nodeHeight, arc, arc);

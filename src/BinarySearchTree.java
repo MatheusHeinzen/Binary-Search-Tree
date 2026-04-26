@@ -23,6 +23,13 @@ public class BinarySearchTree {
         return root;
     }
 
+    public boolean search(String name) {
+        return searchNodeByName(root, name) != null;
+    }
+    public boolean search(int ranking) {
+        return searchNodeByRanking(root, ranking) != null;
+    }
+
     public Player searchPlayerByName(String name) {
         Node foundNode = searchNodeByName(root, name);
         return foundNode == null ? null : foundNode.getPlayer();
@@ -58,6 +65,14 @@ public class BinarySearchTree {
             return  searchNodeByRanking(current.getRight(), ranking);
         }
         return current;
+    }
+
+    public Node findNodeByName(String name) {
+        return searchNodeByName(root, name);
+    }
+
+    public Node findNodeByRanking(int ranking) {
+        return searchNodeByRanking(root, ranking);
     }
 
     public Player remove(String name) {
