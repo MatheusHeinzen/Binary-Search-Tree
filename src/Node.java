@@ -4,6 +4,10 @@ public class Node {
     private Node right;
     private boolean highlighted = false;
 
+    double viewX, viewY;
+    double targetX, targetY;
+    boolean viewInitialized = false;
+
     public Node(Player player) {
         this.player = player;
     }
